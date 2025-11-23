@@ -26,7 +26,7 @@ public class PredictionController {
         this.repo = repo;
     }
 
-    /** -------------------- SINGLE PREDICTION -------------------- **/
+    /** SINGLE PREDICTION **/
     @PostMapping("/single")
     public ResponseEntity<PredictionResponse> predictSingle(@RequestBody Map<String, Object> payload) {
         try {
@@ -37,24 +37,21 @@ public class PredictionController {
         }
     }
 
-    /** -------------------- BATCH CSV PREDICTION + SAVE TO DB -------------------- **/
+    /** BATCH CSV PREDICTION + SAVE TO DB **/
     @PostMapping("/batch")
     public ResponseEntity<byte[]> predictBatch(@RequestParam("file") MultipartFile file) {
         try {
-            List<Map<String, String>> rows = CsvUtil.readCsvAsMaps(file.getInputStream());
 
+            List<Map<String, String>> rows = CsvUtil.readCsvAsMaps(file.getInputStream());
             List<Map<String, Object>> outputRows = new ArrayList<>();
 
             for (Map<String, String> r : rows) {
 
-                /** 1️⃣ Convert CSV to Payload */
                 Map<String, Object> payload = new LinkedHashMap<>();
                 r.forEach((k, v) -> payload.put(k, tryParse(v)));
 
-                /** 2️⃣ ML Prediction */
                 PredictionResponse pr = ml.predictSingle(payload);
 
-                /** 3️⃣ Save Student to DB */
                 Student s = Student.builder()
                         .name(getStr(payload, "name"))
                         .district(getStr(payload, "district"))
@@ -67,54 +64,58 @@ public class PredictionController {
                         .marks11(getInt(payload, "marks_11"))
                         .marks12(getInt(payload, "marks_12"))
 
+                        // NEW FIELDS
+                        .cutoff(getInt(payload, "cutoff"))
+                        .preferredLocation(getStr(payload, "preferred_location"))
+                        .preferredCourse(getStr(payload, "preferred_course"))
+                        .familyIncomeTier(getStr(payload, "family_income_tier"))
+
                         .familyIncome(getInt(payload, "family_income"))
                         .familyMembers(getInt(payload, "family_members"))
 
+                        .motivationalScore(getDouble(payload, "motivational_score"))
+                        .attendanceRate(getDouble(payload, "attendance_rate"))
+                        .communicationFreq(getDouble(payload, "communication_freq"))
+                        .interestLvl(getDouble(payload, "interest_lvl"))
+                        .familySupport(getDouble(payload, "family_support"))
+
                         .academicScore(getInt(payload, "academic_score"))
-                        .motivationLevel(getInt(payload, "motivation_level"))
-                        .attendanceRate(getInt(payload, "attendance_rate"))
-
-                        .communicationFrequency(getStr(payload, "communication_frequency"))
-                        .familySupport(getStr(payload, "family_support"))
-
-                        .schoolType10(getStr(payload, "school_type_10"))
-                        .schoolType11(getStr(payload, "school_type_11"))
-                        .schoolType12(getStr(payload, "school_type_12"))
 
                         .orphan(getStr(payload, "orphan"))
                         .singleParent(getStr(payload, "single_parent"))
-                        .girlChild(getStr(payload, "girl_child"))
+                        .firstGraduate(getStr(payload, "first_graduate"))
+                        .girlchild(getStr(payload, "girlchild") == null 
+                                   ? getStr(payload, "girl_child") 
+                                   : getStr(payload, "girlchild"))
 
-                        .siblings(getStr(payload, "siblings"))
-                        .siblingsDetails(getStr(payload, "siblings_details"))
-                        .siblingsWorkOrCollege(getStr(payload, "siblings_work_or_college"))
+                        .attitude(getStr(payload, "attitude"))
 
-                        .rentOrOwn(getStr(payload, "rent_or_own"))
-                        .propertyOwned(getStr(payload, "property_owned"))
-
+                        // Legacy (optional)
+                        .communicationFrequency(getStr(payload, "communication_frequency"))
+                        .schoolType10(getStr(payload, "school_type_10"))
+                        .schoolType11(getStr(payload, "school_type_11"))
+                        .schoolType12(getStr(payload, "school_type_12"))
                         .willingHostel(getStr(payload, "willing_hostel"))
                         .anyScholarship(getStr(payload, "any_scholarship"))
                         .parentsOccupation(getStr(payload, "parents_occupation"))
                         .privateOrGovtSchool(getStr(payload, "private_or_govt_school"))
-                        .firstGraduate(getStr(payload, "first_graduate"))
                         .scholarshipEligibility(getStr(payload, "scholarship_eligibility"))
                         .extraCurricular(getStr(payload, "extra_curricular"))
-                        .interestLevel(getStr(payload, "interest_level"))
-                        .attitude(getStr(payload, "attitude"))
                         .schoolFee6to12(getStr(payload, "school_fee_6_to_12"))
+
                         .build();
 
                 repo.save(s);
 
-                /** 4️⃣ Build CSV Output Row */
-                payload.put("dropout_probability", pr.getDropout_probability());
-                payload.put("deservingness_score", pr.getDeservingness_score());
-                payload.put("risk_tier", pr.getRisk_tier());
+                Map<String, Object> out = new LinkedHashMap<>(payload);
+                out.put("dropout_probability", pr.getDropout_probability());
+                out.put("deservingness_score", pr.getDeservingness_score());
+                out.put("risk_tier", pr.getRisk_tier());
+                out.put("explanation", pr.getExplanation() == null ? "" : pr.getExplanation());
 
-                outputRows.add(payload);
+                outputRows.add(out);
             }
 
-            /** 5️⃣ Return predictions.csv */
             ByteArrayOutputStream bout = new ByteArrayOutputStream();
             CsvUtil.writeMapsToCsv(outputRows, bout);
 
@@ -129,7 +130,7 @@ public class PredictionController {
         }
     }
 
-    /** -------------------- HELPERS -------------------- **/
+    /** HELPERS **/
     private Object tryParse(String v) {
         if (v == null || v.isBlank()) return "";
         if (v.matches("^-?\\d+$")) return Integer.valueOf(v);
@@ -144,5 +145,10 @@ public class PredictionController {
     private Integer getInt(Map<String, Object> m, String k) {
         try { return Integer.valueOf(m.getOrDefault(k, "0").toString()); }
         catch (Exception ex) { return 0; }
+    }
+
+    private Double getDouble(Map<String, Object> m, String k) {
+        try { return Double.valueOf(m.getOrDefault(k, "0").toString()); }
+        catch (Exception ex) { return 0.0; }
     }
 }

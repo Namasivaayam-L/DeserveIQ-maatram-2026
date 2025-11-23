@@ -68,6 +68,52 @@ const Gauge = ({ label, value, suffix = '', variant = 'info' }) => {
   );
 };
 
+// -------- explanation parser (same logic as Students.jsx) ----------
+const parseExplanation = (raw) => {
+  if (!raw) return null;
+
+  let obj = null;
+
+  if (typeof raw === 'string') {
+    try {
+      obj = JSON.parse(raw);
+    } catch {
+      return { raw };
+    }
+  } else if (typeof raw === 'object') {
+    obj = raw;
+  }
+
+  if (!obj) return null;
+
+  const toNum = (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  };
+
+  const listify = (v) => {
+    if (!v) return [];
+    if (Array.isArray(v)) return v;
+    const s = String(v).replace(/^\[|\]$/g, '');
+    return s
+      .split(',')
+      .map((x) => x.trim().replace(/^['"]|['"]$/g, ''))
+      .filter(Boolean);
+  };
+
+  return {
+    final_probability_used: toNum(obj.final_probability_used),
+    model_probability: toNum(obj.model_probability),
+    rule_probability: toNum(obj.rule_probability),
+    global_top_model_features: listify(
+      obj.global_top_model_features || obj.top_features
+    ),
+    human_readable_reasons: listify(
+      obj.human_readable_reasons || obj.reasons
+    ),
+  };
+};
+
 export default function StudentProfile() {
   const { id } = useParams();
   const [s, setS] = useState(null);
@@ -91,10 +137,12 @@ export default function StudentProfile() {
           const payload = buildPayloadFromStudent(stu);
           const p = await predictSingle(payload);
           setPred({
-            dropout_probability: Number(p.dropout_probability),
-            deservingness_score: Number(p.deservingness_score),
-            risk_tier: p.risk_tier,
-          });
+  dropout_probability: Number(p.dropout_probability),
+  deservingness_score: Number(p.deservingness_score),
+  risk_tier: p.risk_tier,
+  explanation: p.explanation ?? p.explanation_json ?? null,
+});
+
         } catch (e) {
           console.error('Prediction error', e);
           setPred(null);
@@ -121,9 +169,21 @@ export default function StudentProfile() {
     return {
       attendance: Number(s.attendance_rate ?? s.attendanceRate ?? 0),
       academic: Number(s.academic_score ?? s.academicScore ?? 0),
-      motivation: Number(s.motivation_level ?? s.motivationLevel ?? 0),
+      motivation: Number(s.motivation_level ?? s.motivational_score ?? 0),
     };
   }, [s]);
+
+ const explanation = useMemo(() => {
+  if (!pred) return null;
+  return parseExplanation(
+    pred.explanation ??
+      pred.explanation_json ??
+      pred.explanationJson ??
+      null
+  );
+}, [pred]);
+
+
 
   if (loading) {
     return (
@@ -369,9 +429,7 @@ export default function StudentProfile() {
                         />
                         <Gauge
                           label="Motivation level"
-                          value={
-                            ((derived.motivation || 0) / 5) * 100 || 0
-                          }
+                          value={((derived.motivation || 0) / 5) * 100 || 0}
                           suffix="/100"
                           variant="info"
                         />
@@ -420,21 +478,118 @@ export default function StudentProfile() {
                             />
                           </div>
 
-                          <div className="mt-3 small text-muted">
-                            Explanation:
+                          {/* Explanation from stored explanation JSON */}
+                          <div className="mt-3">
+                            <div className="small text-muted mb-1">
+                              Explanation (model + rules)
+                            </div>
+
+                            {!explanation ? (
+                              <p className="small text-muted mb-0">
+                                No stored explanation for this student.
+                              </p>
+                            ) : explanation.raw ? (
+                              <pre
+                                className="small"
+                                style={{
+                                  background: '#f3f4f6',
+                                  padding: 10,
+                                  borderRadius: 10,
+                                  fontSize: '0.75rem',
+                                }}
+                              >
+                                {explanation.raw}
+                              </pre>
+                            ) : (
+                              <>
+                                <Row className="mb-2">
+                                  <Col xs={12}>
+                                    <div className="d-flex flex-wrap small">
+                                      <span className="me-3 mb-1">
+                                        <strong>Final:</strong>{' '}
+                                        {explanation.final_probability_used !=
+                                        null
+                                          ? (
+                                              explanation.final_probability_used *
+                                              100
+                                            ).toFixed(1) + '%'
+                                          : 'N/A'}
+                                      </span>
+                                      <span className="me-3 mb-1">
+                                        <strong>Model:</strong>{' '}
+                                        {explanation.model_probability != null
+                                          ? (
+                                              explanation.model_probability *
+                                              100
+                                            ).toFixed(1) + '%'
+                                          : 'N/A'}
+                                      </span>
+                                      <span className="mb-1">
+                                        <strong>Rule:</strong>{' '}
+                                        {explanation.rule_probability != null
+                                          ? (
+                                              explanation.rule_probability *
+                                              100
+                                            ).toFixed(1) + '%'
+                                          : 'N/A'}
+                                      </span>
+                                    </div>
+                                  </Col>
+                                </Row>
+
+                                <div className="mb-2">
+                                  <div className="small text-muted mb-1">
+                                    Top influencing features
+                                  </div>
+                                  {explanation.global_top_model_features
+                                    .length > 0 ? (
+                                    <div className="mb-1">
+                                      {explanation.global_top_model_features.map(
+                                        (f, i) => (
+                                          <Badge
+                                            bg="light"
+                                            text="dark"
+                                            className="me-2 mb-2"
+                                            key={i}
+                                            style={{
+                                              borderRadius: 999,
+                                              fontSize: '0.7rem',
+                                            }}
+                                          >
+                                            {f}
+                                          </Badge>
+                                        )
+                                      )}
+                                    </div>
+                                  ) : (
+                                    <p className="small text-muted mb-1">
+                                      Not provided.
+                                    </p>
+                                  )}
+                                </div>
+
+                                <div>
+                                  <div className="small text-muted mb-1">
+                                    Human-readable reasons
+                                  </div>
+                                  {explanation.human_readable_reasons.length >
+                                  0 ? (
+                                    <ul className="small text-muted mb-0">
+                                      {explanation.human_readable_reasons.map(
+                                        (r, i) => (
+                                          <li key={i}>{r}</li>
+                                        )
+                                      )}
+                                    </ul>
+                                  ) : (
+                                    <p className="small text-muted mb-0">
+                                      Not provided.
+                                    </p>
+                                  )}
+                                </div>
+                              </>
+                            )}
                           </div>
-                          <p className="small text-muted mb-2">
-                            This label is produced by your ML model by combining
-                            academic performance, attendance, family income,
-                            support indicators and scholarship data. Use this
-                            information as a guide to prioritise counselling,
-                            financial aid and mentoring.
-                          </p>
-                          <p className="small text-muted mb-0">
-                            High deservingness with moderate risk suggests a
-                            strong candidate who may benefit greatly from
-                            targeted support.
-                          </p>
                         </>
                       ) : (
                         <p className="text-muted mt-3">

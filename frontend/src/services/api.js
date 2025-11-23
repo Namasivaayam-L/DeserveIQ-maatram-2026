@@ -12,3 +12,5 @@ export const predictBatch = (file) => {
 export const getStudents = () => client.get(API_STUDENTS).then(r=>r.data)
 export const createStudent = (payload) => client.post(API_STUDENTS, payload).then(r=>r.data)
 export const getStudent = (id) => client.get(`${API_STUDENTS}/${id}`).then(r=>r.data)
+export const deleteStudent = (id) =>
+  client.delete(`${API_STUDENTS}/${id}`).then(r => r.data);

@@ -111,6 +111,54 @@ const RiskBadge = ({ tier }) => {
     </Badge>
   );
 };
+// ✅ explanation parser for PredictionsTable
+const parseExplanation = (raw) => {
+  if (!raw) return null;
+
+  let obj = null;
+
+  if (typeof raw === "string") {
+    try {
+      obj = JSON.parse(raw);
+    } catch {
+      return { raw };
+    }
+  } else if (typeof raw === "object") {
+    obj = raw;
+  }
+
+  if (!obj) return null;
+
+  const toNum = (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  };
+
+  const listify = (v) => {
+    if (!v) return [];
+    if (Array.isArray(v)) return v;
+    const s = String(v).replace(/^\[|\]$/g, "");
+    return s
+      .split(",")
+      .map((x) => x.trim().replace(/^['"]|['"]$/g, ""))
+      .filter(Boolean);
+  };
+
+  return {
+    final_probability_used: toNum(obj.final_probability_used),
+    model_probability: toNum(obj.model_probability),
+    rule_probability: toNum(obj.rule_probability),
+    global_top_model_features: listify(
+      obj.global_top_model_features || obj.top_features
+    ),
+   human_readable_reasons: listify(
+  obj.human_readable_reasons ||
+  obj.humanReadableReasons ||
+  obj.reasons
+),
+
+  };
+};
 
 /**
  * Main Dashboard page
@@ -147,26 +195,39 @@ export default function Dashboard() {
         const subset = arr.slice(0, 40);
 
         const withPreds = await Promise.all(
-          subset.map(async (s) => {
-            try {
-              const payload = buildPayloadFromStudent(s);
-              const p = await predictSingle(payload);
-              return {
-                ...s,
-                dropout_probability: Number(p.dropout_probability),
-                deservingness_score: Number(p.deservingness_score),
-                risk_tier: p.risk_tier,
-              };
-            } catch {
-              return {
-                ...s,
-                dropout_probability: 0,
-                deservingness_score: 0,
-                risk_tier: 'LOW',
-              };
-            }
-          })
-        );
+  subset.map(async (s) => {
+    try {
+      const payload = buildPayloadFromStudent(s);
+      const p = await predictSingle(payload);
+
+      return {
+        ...s,
+        dropout_probability: Number(p.dropout_probability),
+        deservingness_score: Number(p.deservingness_score),
+        risk_tier:
+          p.risk_tier ?? p.riskTier ?? 'LOW',
+
+        // ✅ ADD THIS
+        explanation:
+          p.explanation ??
+          p.explanation_json ??
+          p.explanationJson ??
+          null,
+      };
+    } catch {
+      return {
+        ...s,
+        dropout_probability: 0,
+        deservingness_score: 0,
+        risk_tier: 'LOW',
+
+        // ✅ fallback
+        explanation: null,
+      };
+    }
+  })
+);
+
 
         setPreds(withPreds);
       } catch (e) {
@@ -479,16 +540,20 @@ export default function Dashboard() {
                     <div className="mt-2">
                       {/* we reuse PredictionsTable but rows already include risk + scores */}
                       <PredictionsTable
-                        rows={topRisk.map((r) => ({
-                          ...r,
-                          dropout_probability: (
-                            Number(r.dropout_probability || 0) * 100
-                          ).toFixed(1),
-                          deservingness_score: Number(
-                            r.deservingness_score || 0
-                          ).toFixed(2),
-                        }))}
-                      />
+  rows={topRisk.map((r) => ({
+    ...r,
+    dropout_probability: (
+      Number(r.dropout_probability || 0) * 100
+    ).toFixed(1),
+    deservingness_score: Number(
+      r.deservingness_score || 0
+    ).toFixed(2),
+
+    // ✅ NEW — always parsed explanation object
+    explanation: parseExplanation(r.explanation),
+  }))}
+/>
+
                     </div>
                   )}
 

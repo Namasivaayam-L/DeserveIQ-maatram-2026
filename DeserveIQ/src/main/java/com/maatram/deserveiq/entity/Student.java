@@ -6,6 +6,7 @@ import lombok.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Entity
 @Table(name = "students")
@@ -18,6 +19,7 @@ public class Student {
     private String name;
     private String district;
 
+    // Old academic columns (keep as before)
     @JsonProperty("passed_out_10")
     private Integer passedOut10;
 
@@ -36,26 +38,64 @@ public class Student {
     @JsonProperty("marks_12")
     private Integer marks12;
 
+    // New priority columns
+    @JsonProperty("cutoff")
+    private Integer cutoff;
+
+    @JsonProperty("preferred_location")
+    private String preferredLocation;
+
+    @JsonProperty("preferred_course")
+    private String preferredCourse;
+
+    @JsonProperty("family_income_tier")
+    private String familyIncomeTier;
+
+    // Family fields (keep numeric family_income if you used earlier)
     @JsonProperty("family_income")
     private Integer familyIncome;
 
     @JsonProperty("family_members")
     private Integer familyMembers;
 
+    // Behavioral columns (use numeric where appropriate)
+    @JsonProperty("motivational_score")
+    private Double motivationalScore;     // new numeric
+
+    @JsonProperty("attendance_rate")
+    private Double attendanceRate;
+
+    @JsonProperty("communication_freq")
+    private Double communicationFreq;
+
+    @JsonProperty("interest_lvl")
+    private Double interestLvl;
+
+    @JsonProperty("family_support")
+    private Double familySupport;         // keep numeric for analytics
+
     @JsonProperty("academic_score")
     private Integer academicScore;
 
-    @JsonProperty("motivation_level")
-    private Integer motivationLevel;
+    // Flags (protective)
+    @JsonProperty("orphan")
+    private String orphan;
 
-    @JsonProperty("attendance_rate")
-    private Integer attendanceRate;
+    @JsonProperty("single_parent")
+    private String singleParent;
 
+    @JsonProperty("first_graduate")
+    private String firstGraduate;
+
+    @JsonProperty("girlchild")
+    private String girlchild;
+
+    @JsonProperty("attitude")
+    private String attitude;
+
+    // Misc (legacy)
     @JsonProperty("communication_frequency")
     private String communicationFrequency;
-
-    @JsonProperty("family_support")
-    private String familySupport;
 
     @JsonProperty("school_type_10")
     private String schoolType10;
@@ -65,30 +105,6 @@ public class Student {
 
     @JsonProperty("school_type_12")
     private String schoolType12;
-
-    @JsonProperty("orphan")
-    private String orphan;
-
-    @JsonProperty("single_parent")
-    private String singleParent;
-
-    @JsonProperty("girl_child")
-    private String girlChild;
-
-    @JsonProperty("siblings")
-    private String siblings;
-
-    @JsonProperty("siblings_details")
-    private String siblingsDetails;
-
-    @JsonProperty("siblings_work_or_college")
-    private String siblingsWorkOrCollege;
-
-    @JsonProperty("rent_or_own")
-    private String rentOrOwn;
-
-    @JsonProperty("property_owned")
-    private String propertyOwned;
 
     @JsonProperty("willing_hostel")
     private String willingHostel;
@@ -102,21 +118,14 @@ public class Student {
     @JsonProperty("private_or_govt_school")
     private String privateOrGovtSchool;
 
-    @JsonProperty("first_graduate")
-    private String firstGraduate;
-
     @JsonProperty("scholarship_eligibility")
     private String scholarshipEligibility;
 
     @JsonProperty("extra_curricular")
     private String extraCurricular;
 
-    @JsonProperty("interest_level")
-    private String interestLevel;
-
-    @JsonProperty("attitude")
-    private String attitude;
-
     @JsonProperty("school_fee_6_to_12")
     private String schoolFee6to12;
+
+    // add other fields here if required
 }
