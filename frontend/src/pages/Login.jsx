@@ -23,20 +23,44 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const nav = useNavigate();
 
-  const submit = (e) => {
-    e.preventDefault();
-    if (!email || !pw) {
-      toast.error("Enter credentials");
+  
+const submit = async (e) => {
+  e.preventDefault();
+
+  if (!email || !pw) {
+    toast.error("Enter credentials");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    // call backend
+    const res = await fetch("http://localhost:8080/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password: pw }),
+    });
+
+    if (!res.ok) {
+      toast.error("Invalid email or password");
       return;
     }
-    setLoading(true);
-    setTimeout(() => {
-      localStorage.setItem("deserveiq_user", JSON.stringify({ email }));
-      toast.success("Logged in");
-      setLoading(false);
-      nav("/");
-    }, 350); // small delay for UX
-  };
+
+    const token = await res.text();
+
+    // store JWT token
+    localStorage.setItem("deserveiq_token", token);
+    localStorage.setItem("deserveiq_user", email);
+
+    toast.success("Logged in");
+    nav("/");
+  } catch (err) {
+    toast.error("Login failed");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div

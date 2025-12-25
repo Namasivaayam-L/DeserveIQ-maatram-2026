@@ -1,0 +1,73 @@
+# services:
+#   mysql:
+#     image: mysql:8.0
+#     container_name: deserveiq-mysql
+#     environment:
+#       MYSQL_ROOT_PASSWORD: root
+#       MYSQL_DATABASE: deserveiq
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#     healthcheck:
+#       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+#       interval: 10s
+#       retries: 5
+
+#   ml-service:
+#     build: ./ml-service
+#     container_name: deserveiq-ml
+#     ports:
+#       - "5000:5000"
+
+#   backend:
+#     build: ./DeserveIQ
+#     container_name: deserveiq-backend
+#     ports:
+#       - "8080:8080"
+#     depends_on:
+#       mysql:
+#         condition: service_healthy
+#       ml-service:
+#         condition: service_started
+#     environment:
+#       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/deserveiq
+#       SPRING_DATASOURCE_USERNAME: root
+#       SPRING_DATASOURCE_PASSWORD: root
+#       ML_API_URL: http://ml-service:5000
+
+#   frontend:
+#     build: ./frontend
+#     container_name: deserveiq-frontend
+#     ports:
+#       - "3000:3000"
+#     depends_on:
+#       - backend
+#     environment:
+#       REACT_APP_API_URL: http://backend:8080
+#       REACT_APP_ML_URL: http://ml-service:5000
+
+# volumes:
+#   mysql_data:
+services:
+  ml-service:
+    build: ./ml-service
+    image: hari2726h/deserveiq-ml:latest
+    ports:
+      - "5000:5000"
+
+  backend:
+    build: ./DeserveIQ
+    image: hari2726h/deserveiq-backend:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ml-service
+
+  frontend:
+    build: ./frontend
+    image: hari2726h/deserveiq-frontend:latest
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend

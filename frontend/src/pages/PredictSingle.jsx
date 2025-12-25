@@ -1,18 +1,4 @@
-// src/pages/PredictSingle.jsx
-/**
- * PredictSingle.jsx
- *
- * Single-file UI that:
- * - keeps the original decorated UI layout (cards, gauges, pills)
- * - uses ONLY the backend-required fields in the payload (no extra fields)
- * - sends that payload to the backend via predictSingle(...) from ../services/api
- * - displays the ML response and a robust parsed explanation (handles strings, escaped-json, maps, arrays)
- *
- * NOTE: sample dataset used for training/testing (available in the environment):
- * /mnt/data/Sample_First_200_rows_final_v3.csv
- *
- * (You asked for a single-file result — this file contains full UI + logic.)
- */
+
 
 import React, { useState } from "react";
 import TopNav from "../components/TopNav";
@@ -432,7 +418,7 @@ export default function PredictSingle() {
                   <Row>
                     <Col md={4}>
                       <Form.Group className="mb-2">
-                        <Form.Label>Attendance Rate (%)</Form.Label>
+                        <Form.Label>Govt Scholoarship Avail Prob(%)</Form.Label>
                         <Form.Control type="number" value={form.attendance_rate} onChange={(e) => update("attendance_rate", Number(e.target.value || 0))} />
                       </Form.Group>
                     </Col>

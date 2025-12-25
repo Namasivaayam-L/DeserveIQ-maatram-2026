@@ -9,9 +9,10 @@ import StudentProfile from './pages/StudentProfile'
 import { ToastContainer } from 'react-toastify'
 
 const RequireAuth = ({ children }) => {
-  const token = localStorage.getItem('deserveiq_user')
-  return token ? children : <Navigate to="/login" replace />
-}
+  const token = localStorage.getItem('deserveiq_token');
+  return token ? children : <Navigate to="/login" replace />;
+};
+
 
 export default function App(){
   return (

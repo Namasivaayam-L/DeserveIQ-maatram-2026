@@ -1,47 +1,38 @@
 // src/components/TopNav.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   Container,
   Nav,
-  Button,
   Dropdown,
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 
-/**
- * PREMIUM NAVBAR for DeserveIQ
- *  - Modern gradient UI
- *  - Animated hover underline for active route
- *  - Protected navigation links
- *  - Glass dropdown for profile menu
- *  - Ultra-responsive layout
- */
-
 export default function TopNav() {
-  // navigation helper
   const nav = useNavigate();
   const location = useLocation();
-
-  // active page
   const activePath = location.pathname;
 
-  // control mobile menu state
   const [expanded, setExpanded] = useState(false);
-
-  // profile dropdown animation state
   const [profileOpen, setProfileOpen] = useState(false);
+
+  // ---- FIXED: Safely parse user JSON ----
+  let saved = null;
+  try {
+    saved = JSON.parse(localStorage.getItem("deserveiq_user"));
+  } catch (e) {
+    saved = null;
+  }
+
+  const username = saved?.email?.split("@")[0] || "Admin";
 
   const logout = () => {
     localStorage.removeItem("deserveiq_user");
     nav("/login");
   };
 
-  const username = JSON.parse(localStorage.getItem("deserveiq_user"))?.email?.split("@")[0] || "Admin";
-
-  // hover animation for menu
   const navLinkStyle = (path) => ({
     cursor: "pointer",
     fontWeight: 500,
@@ -65,7 +56,6 @@ export default function TopNav() {
         zIndex: 1000,
       }}
     >
-      {/* Container */}
       <Container fluid>
         {/* Brand */}
         <Navbar.Brand
@@ -82,7 +72,7 @@ export default function TopNav() {
           DeserveIQ
         </Navbar.Brand>
 
-        {/* Toggle (Mobile) */}
+        {/* Mobile Toggle */}
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"
           onClick={() => setExpanded((prev) => !prev)}
@@ -94,7 +84,6 @@ export default function TopNav() {
           ></i>
         </Navbar.Toggle>
 
-        {/* Menu */}
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-lg-center" style={{ columnGap: 15 }}>
             {[
@@ -174,10 +163,7 @@ export default function TopNav() {
               >
                 <Dropdown.Item
                   onClick={() => nav("/")}
-                  style={{
-                    borderRadius: 12,
-                    fontWeight: 500,
-                  }}
+                  style={{ borderRadius: 12, fontWeight: 500 }}
                 >
                   <i className="bi bi-speedometer2 me-2 text-primary" />
                   Dashboard
@@ -185,10 +171,7 @@ export default function TopNav() {
 
                 <Dropdown.Item
                   onClick={() => nav("/students")}
-                  style={{
-                    borderRadius: 12,
-                    fontWeight: 500,
-                  }}
+                  style={{ borderRadius: 12, fontWeight: 500 }}
                 >
                   <i className="bi bi-people-fill me-2 text-success" />
                   Students
@@ -213,18 +196,17 @@ export default function TopNav() {
         </Navbar.Collapse>
       </Container>
 
-      {/* Inline CSS animations */}
       <style>
         {`
-        .nav-hover:hover {
-          color: #fff !important;
-          opacity: 1 !important;
-        }
-        @keyframes slideIn {
-          from { width: 0%; }
-          to { width: 100%; }
-        }
-      `}
+          .nav-hover:hover {
+            color: #fff !important;
+            opacity: 1 !important;
+          }
+          @keyframes slideIn {
+            from { width: 0%; }
+            to { width: 100%; }
+          }
+        `}
       </style>
     </Navbar>
   );

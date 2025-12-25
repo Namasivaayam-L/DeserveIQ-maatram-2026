@@ -14,3 +14,10 @@ export const createStudent = (payload) => client.post(API_STUDENTS, payload).the
 export const getStudent = (id) => client.get(`${API_STUDENTS}/${id}`).then(r=>r.data)
 export const deleteStudent = (id) =>
   client.delete(`${API_STUDENTS}/${id}`).then(r => r.data);
+client.interceptors.request.use((config) => {
+  const token = localStorage.getItem("deserveiq_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});

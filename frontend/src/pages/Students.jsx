@@ -68,7 +68,9 @@ const pageBackground =
 // -----------------------------------------------------------------------------
 // EXPLANATION PARSER (for "Reasons" modal)
 // -----------------------------------------------------------------------------
-
+// -----------------------------------------------------------------------------
+// EXPLANATION PARSER (for "Reasons" modal) - accepts multiple backend shapes
+// -----------------------------------------------------------------------------
 const parseExplanation = (raw) => {
   if (!raw) return null;
 
@@ -88,30 +90,59 @@ const parseExplanation = (raw) => {
   if (!obj) return null;
 
   const toNum = (v) => {
+    if (v == null) return null;
     const n = Number(v);
     return Number.isFinite(n) ? n : null;
   };
 
   const listify = (v) => {
-    if (!v) return [];
+    if (!v && v !== 0) return [];
     if (Array.isArray(v)) return v;
-    const s = String(v).replace(/^\[|\]$/g, "");
-    return s
-      .split(",")
-      .map((x) => x.trim().replace(/^['"]|['"]$/g, ""))
-      .filter(Boolean);
+    if (typeof v === "string") {
+      // strip surrounding brackets if present and split on commas
+      const s = v.replace(/^\[|\]$/g, "");
+      return s
+        .split(",")
+        .map((x) => x.trim().replace(/^['"]|['"]$/g, ""))
+        .filter(Boolean);
+    }
+    // fallback: try to coerce single value to string
+    return [String(v)];
   };
 
+  // Accept many possible field names produced by different scripts
+  const final_probability_used =
+    toNum(obj.final_probability_used ?? obj.final_prob ?? obj.finalProbability) ??
+    null;
+
+  const model_probability =
+    toNum(obj.model_probability ?? obj.model_prob ?? obj.modelProbability) ?? null;
+
+  const rule_probability =
+    toNum(obj.rule_probability ?? obj.rule_prob ?? obj.ruleProbability) ?? null;
+
+  const global_top_model_features = listify(
+    obj.global_top_model_features ??
+      obj.top_features ??
+      obj.model_top_reason_features ??
+      obj.global_features
+  );
+
+  // human readable reasons may be under multiple keys:
+  const human_readable_reasons = listify(
+    obj.human_readable_reasons ??
+      obj.reasons ??
+      obj.rule_reasons ??
+      obj.rule_reasons_list ??
+      obj.rule_reasons_text
+  );
+
   return {
-    final_probability_used: toNum(obj.final_probability_used),
-    model_probability: toNum(obj.model_probability),
-    rule_probability: toNum(obj.rule_probability),
-    global_top_model_features: listify(
-      obj.global_top_model_features || obj.top_features
-    ),
-    human_readable_reasons: listify(
-      obj.human_readable_reasons || obj.reasons
-    ),
+    final_probability_used,
+    model_probability,
+    rule_probability,
+    global_top_model_features,
+    human_readable_reasons,
   };
 };
 
