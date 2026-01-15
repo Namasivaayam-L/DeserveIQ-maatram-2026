@@ -13,4 +13,3 @@ services:
       - key: ML_API_URL
         fromSecret: ml_api_url
     healthCheckPath: /auth/health
-    buildCommand: mvn clean package -DskipTests
