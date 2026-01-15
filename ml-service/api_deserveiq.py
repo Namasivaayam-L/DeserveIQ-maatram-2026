@@ -24,6 +24,9 @@ meta = json.load(open(META_PATH))
 
 app = Flask(__name__)
 
+# For gunicorn compatibility
+application = app
+
 # ----------------------------
 # COLUMNS USED BY YOUR MODEL
 # ----------------------------

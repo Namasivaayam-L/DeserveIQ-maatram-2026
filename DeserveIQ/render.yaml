@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: deserveiq-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromSecret: database_url
+      - key: DB_USERNAME
+        fromSecret: db_username
+      - key: DB_PASSWORD
+        fromSecret: db_password
+      - key: ML_API_URL
+        fromSecret: ml_api_url
+    healthCheckPath: /auth/health
+    buildCommand: mvn clean package -DskipTests
