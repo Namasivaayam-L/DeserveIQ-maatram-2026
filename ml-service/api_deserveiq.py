@@ -5,6 +5,7 @@
 
 import os, json, joblib, numpy as np, pandas as pd
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 # ----------------------------
 # LOAD MODEL + METADATA
@@ -23,6 +24,14 @@ model = joblib.load(MODEL_PATH)
 meta = json.load(open(META_PATH))
 
 app = Flask(__name__)
+
+# Configure CORS for frontend and backend connections
+CORS(app, origins=[
+    "http://localhost:3000",  # Local React frontend
+    "https://deserveiq-maatram-2026.netlify.app",  # Production frontend
+    "http://localhost:8080",  # Local Spring Boot backend
+    "https://deserveiq-maatram-2026-spring.onrender.com"  # Production Spring Boot backend
+], methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"], allow_headers=["*"], supports_credentials=True)
 
 # For gunicorn compatibility
 application = app
