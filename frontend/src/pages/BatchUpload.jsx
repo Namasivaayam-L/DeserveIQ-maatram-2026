@@ -10,8 +10,6 @@ import {
   Button,
   Table,
   Badge,
-  OverlayTrigger,
-  Tooltip,
 } from "react-bootstrap";
 import { predictBatch } from "../services/api";
 import Papa from "papaparse";
