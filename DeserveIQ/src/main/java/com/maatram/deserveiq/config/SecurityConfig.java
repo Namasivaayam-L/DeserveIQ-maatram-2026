@@ -17,7 +17,7 @@ public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtFilte
         .csrf(csrf -> csrf.disable())
         .cors(cors -> {})
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/auth/login").permitAll()
+            .requestMatchers("/auth/login", "/health").permitAll()
             .anyRequest().authenticated()
         )
         .sessionManagement(sess -> sess.sessionCreationPolicy(
