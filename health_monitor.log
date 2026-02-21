@@ -1,0 +1,232 @@
+2026-01-17 09:36:25 - INFO - 🚀 Starting Health Monitor for DeserveIQ Services
+2026-01-17 09:36:25 - INFO - ============================================================
+2026-01-17 09:36:25 - INFO - Monitoring URLs:
+2026-01-17 09:36:25 - INFO -   - https://deserveiq-maatram-2026.onrender.com/health
+2026-01-17 09:36:25 - INFO -   - https://deserveiq-maatram-2026-spring.onrender.com/health
+2026-01-17 09:36:25 - INFO - ============================================================
+2026-01-17 09:36:25 - INFO - Press Ctrl+C to stop monitoring
+2026-01-17 09:36:25 - INFO - Logs are being saved to: health_monitor.log
+2026-01-17 09:36:25 - INFO - ============================================================
+2026-01-17 09:36:25 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 09:36:26 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.80s - Body: {"status":"healthy"}
+
+2026-01-17 09:36:26 - WARNING - ⚠️  https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 403 - Response Time: 0.89s - Body: 
+2026-01-17 09:36:26 - WARNING - ⚠️  Some services are unhealthy
+2026-01-17 09:36:26 - INFO - ----------------------------------------
+2026-01-17 09:45:27 - INFO - 🚀 Starting Health Monitor for DeserveIQ Services
+2026-01-17 09:45:27 - INFO - ============================================================
+2026-01-17 09:45:27 - INFO - Monitoring URLs:
+2026-01-17 09:45:27 - INFO -   - https://deserveiq-maatram-2026.onrender.com/health
+2026-01-17 09:45:27 - INFO -   - https://deserveiq-maatram-2026-spring.onrender.com/health
+2026-01-17 09:45:27 - INFO - ============================================================
+2026-01-17 09:45:27 - INFO - Press Ctrl+C to stop monitoring
+2026-01-17 09:45:27 - INFO - Logs are being saved to: health_monitor.log
+2026-01-17 09:45:27 - INFO - ============================================================
+2026-01-17 09:45:27 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 09:45:28 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+
+2026-01-17 09:45:30 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 2.74s - Body: {"status":"healthy"}
+2026-01-17 09:45:30 - INFO - ✅ All services are healthy
+2026-01-17 09:45:30 - INFO - ----------------------------------------
+2026-01-17 09:52:34 - INFO - 🚀 Starting Health Monitor for DeserveIQ Services
+2026-01-17 09:52:34 - INFO - ============================================================
+2026-01-17 09:52:34 - INFO - Monitoring URLs:
+2026-01-17 09:52:34 - INFO -   - https://deserveiq-maatram-2026.onrender.com/health
+2026-01-17 09:52:34 - INFO -   - https://deserveiq-maatram-2026-spring.onrender.com/health
+2026-01-17 09:52:34 - INFO - ============================================================
+2026-01-17 09:52:34 - INFO - Press Ctrl+C to stop monitoring
+2026-01-17 09:52:34 - INFO - Logs are being saved to: health_monitor.log
+2026-01-17 09:52:34 - INFO - ============================================================
+2026-01-17 09:52:34 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 09:52:35 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.84s - Body: {"status":"healthy"}
+
+2026-01-17 09:52:35 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+2026-01-17 09:52:35 - INFO - ✅ All services are healthy
+2026-01-17 09:52:35 - INFO - ----------------------------------------
+2026-01-17 10:06:35 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 10:06:35 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+
+2026-01-17 10:06:36 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+2026-01-17 10:06:36 - INFO - ✅ All services are healthy
+2026-01-17 10:06:36 - INFO - ----------------------------------------
+2026-01-17 10:20:36 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 10:20:36 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.88s - Body: {"status":"healthy"}
+
+2026-01-17 10:20:37 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.92s - Body: {"status":"healthy"}
+2026-01-17 10:20:37 - INFO - ✅ All services are healthy
+2026-01-17 10:20:37 - INFO - ----------------------------------------
+2026-01-17 10:34:37 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 10:34:38 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.35s - Body: {"status":"healthy"}
+
+2026-01-17 10:34:38 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+2026-01-17 10:34:38 - INFO - ✅ All services are healthy
+2026-01-17 10:34:38 - INFO - ----------------------------------------
+2026-01-17 10:48:38 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 10:48:39 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.83s - Body: {"status":"healthy"}
+
+2026-01-17 10:48:39 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.44s - Body: {"status":"healthy"}
+2026-01-17 10:48:39 - INFO - ✅ All services are healthy
+2026-01-17 10:48:39 - INFO - ----------------------------------------
+2026-01-17 11:02:39 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 11:02:40 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.78s - Body: {"status":"healthy"}
+
+2026-01-17 11:02:40 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+2026-01-17 11:02:40 - INFO - ✅ All services are healthy
+2026-01-17 11:02:40 - INFO - ----------------------------------------
+2026-01-17 11:16:40 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 11:16:41 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.35s - Body: {"status":"healthy"}
+
+2026-01-17 11:16:41 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.35s - Body: {"status":"healthy"}
+2026-01-17 11:16:41 - INFO - ✅ All services are healthy
+2026-01-17 11:16:41 - INFO - ----------------------------------------
+2026-01-17 11:30:41 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 11:30:42 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.35s - Body: {"status":"healthy"}
+
+2026-01-17 11:30:42 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.31s - Body: {"status":"healthy"}
+2026-01-17 11:30:42 - INFO - ✅ All services are healthy
+2026-01-17 11:30:42 - INFO - ----------------------------------------
+2026-01-17 11:44:42 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 11:44:42 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.35s - Body: {"status":"healthy"}
+
+2026-01-17 11:44:43 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+2026-01-17 11:44:43 - INFO - ✅ All services are healthy
+2026-01-17 11:44:43 - INFO - ----------------------------------------
+2026-01-17 11:58:43 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 11:58:43 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.83s - Body: {"status":"healthy"}
+
+2026-01-17 11:58:44 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.33s - Body: {"status":"healthy"}
+2026-01-17 11:58:44 - INFO - ✅ All services are healthy
+2026-01-17 11:58:44 - INFO - ----------------------------------------
+2026-01-17 12:12:44 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 12:12:45 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.95s - Body: {"status":"healthy"}
+
+2026-01-17 12:12:45 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.35s - Body: {"status":"healthy"}
+2026-01-17 12:12:45 - INFO - ✅ All services are healthy
+2026-01-17 12:12:45 - INFO - ----------------------------------------
+2026-01-17 12:26:45 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 12:26:45 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.32s - Body: {"status":"healthy"}
+
+2026-01-17 12:26:46 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.85s - Body: {"status":"healthy"}
+2026-01-17 12:26:46 - INFO - ✅ All services are healthy
+2026-01-17 12:26:46 - INFO - ----------------------------------------
+2026-01-17 12:40:46 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 12:40:47 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.35s - Body: {"status":"healthy"}
+
+2026-01-17 12:40:47 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.31s - Body: {"status":"healthy"}
+2026-01-17 12:40:47 - INFO - ✅ All services are healthy
+2026-01-17 12:40:47 - INFO - ----------------------------------------
+2026-01-17 12:54:47 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 12:54:48 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.86s - Body: {"status":"healthy"}
+
+2026-01-17 12:54:49 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.90s - Body: {"status":"healthy"}
+2026-01-17 12:54:49 - INFO - ✅ All services are healthy
+2026-01-17 12:54:49 - INFO - ----------------------------------------
+2026-01-17 13:08:49 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 13:08:49 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.33s - Body: {"status":"healthy"}
+
+2026-01-17 13:08:49 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+2026-01-17 13:08:49 - INFO - ✅ All services are healthy
+2026-01-17 13:08:49 - INFO - ----------------------------------------
+2026-01-17 13:22:49 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 13:22:50 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.47s - Body: {"status":"healthy"}
+
+2026-01-17 13:22:50 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.31s - Body: {"status":"healthy"}
+2026-01-17 13:22:50 - INFO - ✅ All services are healthy
+2026-01-17 13:22:50 - INFO - ----------------------------------------
+2026-01-17 13:36:50 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 13:36:50 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+
+2026-01-17 13:36:51 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.83s - Body: {"status":"healthy"}
+2026-01-17 13:36:51 - INFO - ✅ All services are healthy
+2026-01-17 13:36:51 - INFO - ----------------------------------------
+2026-01-17 13:50:51 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 13:50:52 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.38s - Body: {"status":"healthy"}
+
+2026-01-17 13:50:53 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.92s - Body: {"status":"healthy"}
+2026-01-17 13:50:53 - INFO - ✅ All services are healthy
+2026-01-17 13:50:53 - INFO - ----------------------------------------
+2026-01-17 14:04:53 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 14:04:53 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.98s - Body: {"status":"healthy"}
+
+2026-01-17 14:04:54 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.37s - Body: {"status":"healthy"}
+2026-01-17 14:04:54 - INFO - ✅ All services are healthy
+2026-01-17 14:04:54 - INFO - ----------------------------------------
+2026-01-17 14:18:54 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 14:18:54 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.32s - Body: {"status":"healthy"}
+
+2026-01-17 14:18:55 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.32s - Body: {"status":"healthy"}
+2026-01-17 14:18:55 - INFO - ✅ All services are healthy
+2026-01-17 14:18:55 - INFO - ----------------------------------------
+2026-01-17 14:32:55 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 14:32:55 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.32s - Body: {"status":"healthy"}
+
+2026-01-17 14:32:55 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+2026-01-17 14:32:55 - INFO - ✅ All services are healthy
+2026-01-17 14:32:55 - INFO - ----------------------------------------
+2026-01-17 14:46:55 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 14:46:55 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.32s - Body: {"status":"healthy"}
+
+2026-01-17 14:46:56 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.97s - Body: {"status":"healthy"}
+2026-01-17 14:46:56 - INFO - ✅ All services are healthy
+2026-01-17 14:46:56 - INFO - ----------------------------------------
+2026-01-17 15:07:24 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 15:07:34 - ERROR - ❌ https://deserveiq-maatram-2026.onrender.com/health - TIMEOUT after 10s
+2026-01-17 15:07:44 - ERROR - ❌ https://deserveiq-maatram-2026-spring.onrender.com/health - TIMEOUT after 10s
+2026-01-17 15:07:44 - WARNING - ⚠️  Some services are unhealthy
+2026-01-17 15:07:44 - INFO - ----------------------------------------
+2026-01-17 15:21:44 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 15:21:44 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.43s - Body: {"status":"healthy"}
+
+2026-01-17 15:21:47 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 2.52s - Body: {"status":"healthy"}
+2026-01-17 15:21:47 - INFO - ✅ All services are healthy
+2026-01-17 15:21:47 - INFO - ----------------------------------------
+2026-01-17 15:35:47 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 15:35:47 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.42s - Body: {"status":"healthy"}
+
+2026-01-17 15:35:48 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.49s - Body: {"status":"healthy"}
+2026-01-17 15:35:48 - INFO - ✅ All services are healthy
+2026-01-17 15:35:48 - INFO - ----------------------------------------
+2026-01-17 15:49:48 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 15:49:48 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.45s - Body: {"status":"healthy"}
+
+2026-01-17 15:49:49 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.92s - Body: {"status":"healthy"}
+2026-01-17 15:49:49 - INFO - ✅ All services are healthy
+2026-01-17 15:49:49 - INFO - ----------------------------------------
+2026-01-17 16:03:49 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 16:03:50 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.61s - Body: {"status":"healthy"}
+
+2026-01-17 16:03:50 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+2026-01-17 16:03:50 - INFO - ✅ All services are healthy
+2026-01-17 16:03:50 - INFO - ----------------------------------------
+2026-01-17 16:17:50 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 16:17:50 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.38s - Body: {"status":"healthy"}
+
+2026-01-17 16:17:51 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.34s - Body: {"status":"healthy"}
+2026-01-17 16:17:51 - INFO - ✅ All services are healthy
+2026-01-17 16:17:51 - INFO - ----------------------------------------
+2026-01-17 16:31:51 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 16:31:51 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.38s - Body: {"status":"healthy"}
+
+2026-01-17 16:31:52 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.86s - Body: {"status":"healthy"}
+2026-01-17 16:31:52 - INFO - ✅ All services are healthy
+2026-01-17 16:31:52 - INFO - ----------------------------------------
+2026-01-17 16:45:52 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 16:45:52 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.45s - Body: {"status":"healthy"}
+
+2026-01-17 16:45:53 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.36s - Body: {"status":"healthy"}
+2026-01-17 16:45:53 - INFO - ✅ All services are healthy
+2026-01-17 16:45:53 - INFO - ----------------------------------------
+2026-01-17 16:59:53 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 16:59:53 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.37s - Body: {"status":"healthy"}
+
+2026-01-17 16:59:53 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.38s - Body: {"status":"healthy"}
+2026-01-17 16:59:53 - INFO - ✅ All services are healthy
+2026-01-17 16:59:53 - INFO - ----------------------------------------
+2026-01-17 17:13:53 - INFO - 🔍 Checking all health endpoints...
+2026-01-17 17:13:54 - INFO - ✅ https://deserveiq-maatram-2026.onrender.com/health - Status: 200 - Response Time: 0.38s - Body: {"status":"healthy"}
+
+2026-01-17 17:13:55 - INFO - ✅ https://deserveiq-maatram-2026-spring.onrender.com/health - Status: 200 - Response Time: 0.98s - Body: {"status":"healthy"}
+2026-01-17 17:13:55 - INFO - ✅ All services are healthy
+2026-01-17 17:13:55 - INFO - ----------------------------------------
+2026-01-17 17:26:30 - INFO - 🛑 Monitoring stopped by user (Ctrl+C)
+2026-01-17 17:26:30 - INFO - ============================================================
